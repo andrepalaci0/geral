@@ -1,0 +1,13 @@
+Slides para AED no geral:
+https://dcm.ffclrp.usp.br/~augusto/teaching/aedi/
+
+
+LISTAS LIGADADAS
+
+1- Sentinela -> Acelera busca
+2- Nó "cabeça" -> Simplifica programação
+3- Circularidade -> Ditado pela aplicação (?)
+4- Encadeamento duplo -> Ditado pela aplicação 
+
+Sobre listas ligadas e sentinela:
+https://dcm.ffclrp.usp.br/~augusto/teaching/aedi/AED-I-Listas-Ordenadas.pdf
