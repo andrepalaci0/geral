@@ -5,13 +5,13 @@
 
 // ######### ESCREVA O NROUSP AQUI
 char* nroUSP() {
-    return("0000000");
+    return("13835534");
 }
 
 
 // ######### ESCREVA SEU NOME AQUI
 char* nome() {
-    return("kkkkkkkkkk");
+    return("Andre_Palacio_Braga_Tivo");
 }
 
 // elemento da lista

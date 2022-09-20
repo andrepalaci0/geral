@@ -2,7 +2,8 @@
 
 int main()
 {
-    int n = 1000;
-    printf("%i", sizeof(int));
-    
+    int teste = 1;
+    int alo = 2;
+    printf("teste %d\n", teste);
+    return 0;
 }
