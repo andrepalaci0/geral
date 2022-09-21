@@ -1,0 +1,41 @@
+
+Não há estrutura lista, ou seja, o trabalho deve ser realizado somente com os nos
+Existe somente o proximo elemento do nó e sua chave.
+Portanto, a logica basica, tendo em conta que a lista esta ordenada e podem haver elementos repetidos é:
+
+-ordena primeiro depois tira os repetidos para nao percorrer a lista tantas vezes
+-necessario ter uma variavel anterior para ligar com o proximo do nó deletado
+
+1) É necessario evitar a repeticao, ou seja:
+
+    é necessario ter um auxiliar 'anterior', pois, ao se excluir um nó com chave repetida, é necessario ligar o anterior do excluido com o próximo do excluido, 
+    se isso nao for feito, a lista sera perdida
+
+    se a chave no nó atual de uma das listas é igual a do proximo nó da mesma lista, exclua a chave e passe para o proximo nó. 
+    
+    ao retirar os numeros repetidos da lista, se passa ao proximo passo
+
+2) Uniao de fato das listas // unir elas em uma so, utilizando a estrutura de nós da primeira lista ja existente.
+    
+    Ao se fazer a uniao das listas, é necessario comparar os numeros entre as listas para, caso algum numero se repita, ele nao seja inserido
+
+        duas opçoes:
+
+                comparar as listas, tendo a primeira como principal 'esqueleto', ou seja, excluindo os numeros que se repetem da segunda lista,
+                dessa forma, a uniao de fato seria feita em dois passos:
+                    1) comparar a segunda lista com a primeira, removendo os elementos repetidos da segunda
+                    2) unir de fato as listas, com a segunda tendo somente elementos que não aparecem na primeira lista
+                esses passos aumentam bastante o numero de iteraçoes, porem (creio eu) facilitam o codigo, pois excluem a necessidade de se comparar enquanto se une
+                as listas.         
+
+                unir as listas enquanto se analiza os numeros repetidos, definitivamente é menos complexo, porém o construcao do codigo se torna mais dificil
+0 0 1 1 1 1 3 5 5 6 7 7 7 8 8 8 10 11 11 11 11 12 12 12 13 13 13 14 14 14 15 15 16 17 17 18 18 18 19 19 19 20 20 20 21 21 21 22 22 22 23 23 24 24 24 25 26 26 26 27
+27 28 28 29 29 29 29 30 30 31 31 32 33 33 33 33 34 34 34 35 36 38 38 38 39 39 39 39 40 41 41 42 43 43 44 45 45 45 45 47 47 47 47 49 50 50 50 51 52 52 52 52 52 
+53 54 54 55 55 55 56 56 57 58 58 58 58 59 59 60 60 61 63 64 64 65 66 66 66 66 67 67 68 68 69 69 69 69 70 70 71 71 72 73 73 73 75 76 76 76 78 78 79 80 80 81 82 82
+85 85 85 85 86 86 87 87 88 89 90 91 92 93 93 93 94 94 94 94 94 95 95 95 95 96 97 97 99 99 99 99 99
+
+----pseudocodigo: 
+
+funcao uniao( NO* p1, NO* p2) //os dois nos que iniciam a lista
+ NO* resposta = null //ja fica anunciado um no livre 'resposta'
+
