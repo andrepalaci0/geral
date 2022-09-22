@@ -27,7 +27,6 @@ typedef struct estr {
 NO* uniao(NO* p1, NO* p2);
 NO* juntar(NO** p1, NO** p2);
 NO* insercao(NO**  p, int chaveIns);
-NO* removeRepEntreList(NO** p1, NO** p2);
 void imprimir(NO* p);
 //------------------------------------------
 // O EP consiste em implementar esta funcao
@@ -43,30 +42,36 @@ NO* uniao(NO* p1, NO* p2) {
 	return resp;
 }
 
-void ordenar(NO** listaUnida)
+void removerRep(NO** listaOrdenada)
 {
-	NO* a = *listaUnida;
-	NO* b = *listaUnida;
-	while(a)
+	NO* atual;
+	NO* comparado = *listaOrdenada;
+	NO* contador = *listaOrdenada;
+	while (contador)
 	{
-		b = a->prox;
-		while (b)
-		{	
-			if(b->valor < a->valor)
-			{
-				int aux = a->valor;
-				a->valor = b->valor;
-				b->valor = aux; 
-				
-			}
-			b = b->prox;
-			
+		contador = contador->prox;
+		if(atual == NULL)
+		{
+			atual = *listaOrdenada;
+			comparado = comparado->prox;
+			continue;
 		}
-		printf("SAIU DO WHILE B");
-		a = a->prox;
-		}	
+		else
+		{
+			if(atual->valor == comparado->valor)
+			{
+				atual->prox = comparado->prox;
+				free(comparado);
+				comparado = contador;
+			}
+			else
+			{
+				atual = atual->prox;
+				comparado = comparado->prox;
+			}
+		}
+	}
 }
-
 NO* juntar(NO** p1, NO** p2) //a p1 nao pode ser nula, enquanto a p2 pode. Deve ser feita a condicional ANTES da funcao ser aplicada, para evitar erros
 {
 	NO* list1 = *p1;
@@ -111,6 +116,30 @@ NO* insercao(NO** p, int chaveIns)
 	return aux;
 }
 
+void ordenar(NO** listaUnida)
+{
+	NO* a = *listaUnida;
+	NO* b = *listaUnida;
+	while(a)
+	{
+		b = a->prox;
+		while (b)
+		{	
+			if(b->valor < a->valor)
+			{
+				int aux = a->valor;
+				a->valor = b->valor;
+				b->valor = aux; 
+				
+			}
+			b = b->prox;
+			
+		}
+		a = a->prox;
+		}	
+}
+
+
 //----------------------------------------------------------------
 // use main() apenas para fazer chamadas de teste ao seu programa
 //----------------------------------------------------------------
@@ -152,8 +181,8 @@ int main() {
 	ordenar(&pt);
 	printf("\nOrdenada:\n");
 	imprimir(pt);
-	
-
+	removerRep(&pt);
+	imprimir(pt);
 }
 
 // por favor nao inclua nenhum código abaixo deste ponto
