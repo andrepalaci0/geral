@@ -6,6 +6,7 @@ Portanto, a logica basica, tendo em conta que a lista esta ordenada e podem have
 -ordena primeiro depois tira os repetidos para nao percorrer a lista tantas vezes
 -necessario ter uma variavel anterior para ligar com o proximo do nó deletado
 
+
 1) É necessario evitar a repeticao, ou seja:
 
     é necessario ter um auxiliar 'anterior', pois, ao se excluir um nó com chave repetida, é necessario ligar o anterior do excluido com o próximo do excluido, 
@@ -38,4 +39,8 @@ Portanto, a logica basica, tendo em conta que a lista esta ordenada e podem have
 
 funcao uniao( NO* p1, NO* p2) //os dois nos que iniciam a lista
  NO* resposta = null //ja fica anunciado um no livre 'resposta'
+
+
+
+
 

@@ -25,6 +25,7 @@ typedef struct estr {
 
 // funcao principal
 NO* uniao(NO* p1, NO* p2);
+NO* juntar(NO** p1, NO** p2);
 NO* insercao(NO**  p, int chaveIns);
 NO* removeRepEntreList(NO** p1, NO** p2);
 void imprimir(NO* p);
@@ -42,64 +43,44 @@ NO* uniao(NO* p1, NO* p2) {
 	return resp;
 }
 
-void comparaERemov(NO** p1, NO** p2)
+void ordenar(NO** listaUnida)
 {
-	NO* auxp1 = *p1;
-	NO* auxp2 = *p2;
-	NO* auxiliar1;
-	NO* auxiliar2;
-	while(auxp2->prox != NULL)
+	NO* a = *listaUnida;
+	NO* b = *listaUnida;
+	while(a)
 	{
-		while(auxp1->prox != NULL)
-		{
-			if(auxp1->valor == auxp2->valor) //criar variavel auxiliar anterior
+		b = a->prox;
+		while (b)
+		{	
+			if(b->valor < a->valor)
 			{
-				auxiliar2 = auxp2;
-				auxp2->prox = auxp2->prox->prox;
-				free(auxiliar2);
+				int aux = a->valor;
+				a->valor = b->valor;
+				b->valor = aux; 
+				
 			}
-			auxp1 = auxp1->prox;
+			b = b->prox;
+			
 		}
-		auxp2 = auxp2->prox;
-	}
+		printf("SAIU DO WHILE B");
+		a = a->prox;
+		}	
 }
 
-NO* removeRepEntreList(NO** pontPrimList, NO** pontSegnList)
+NO* juntar(NO** p1, NO** p2) //a p1 nao pode ser nula, enquanto a p2 pode. Deve ser feita a condicional ANTES da funcao ser aplicada, para evitar erros
 {
-	NO* auxPrimList = *pontPrimList;
-	NO* auxSegnList = *pontSegnList;
-	NO* antPrim = (NO*)malloc(sizeof(NO));
-	NO* antSegund = (NO*)malloc(sizeof(NO));
-	while(true)
+	NO* list1 = *p1;
+	NO* lista2 = *p2;
+	NO* ultimo;
+	while(list1 != NULL)
 	{
-		if(auxPrimList->prox ==  NULL && auxSegnList->prox == NULL) break; //finaliza a funcao quando o proximo das duas nao existir (ou seja, é o ultimo termo)
-
-		
-		if(antPrim->valor == NULL && antSegund->valor == NULL){
-			if(auxPrimList->valor == auxSegnList->valor){
-
-			}
-		}
-		
-		if(auxPrimList->prox != NULL)
-		{
-			antPrim = auxPrimList;
-			auxPrimList = auxPrimList->prox;
-		}else{
-			continue;
-		}if(auxSegnList->prox != NULL)
-		{
-			antSegund = auxSegnList;
-			auxSegnList = auxSegnList->prox;	
-		}else{
-			continue;
-		}
-		
+		ultimo = list1;
+		list1 = list1->prox;
 	}
-
-	free(antPrim);
-	free(antSegund);
+	ultimo->prox = lista2;
+	return *p1;
 }
+
 
 void imprimir(NO* p)
 {
@@ -118,7 +99,7 @@ NO* insercao(NO** p, int chaveIns)
 	ins->valor = chaveIns;
 	ins->prox = NULL;
 	if(*p == NULL)
-	{
+	{	
 		*p = ins;
 	}else{
 		while(aux->prox != NULL)
@@ -146,7 +127,7 @@ int main() {
 	// o EP sera testado com chamadas deste tipo
 	NO* teste = NULL;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int l;
 		scanf("%i" , &l );
@@ -155,8 +136,24 @@ int main() {
 	}
 	imprimir(p1);
 
+	for (int j = 0; j < 5; j++)
+	{
+		int h;
+		scanf("%i" , &h );
+		insercao(&p2, h);
+		
+	}
 	
-	teste = uniao(p1,p2);
+	//imprimir(p1);
+	//imprimir(p2);
+	NO* pt = juntar(&p1, &p2);
+	printf("Lista unida porem nao organizada nem filtrada\n\n");
+	//imprimir(pt);
+	ordenar(&pt);
+	printf("\nOrdenada:\n");
+	imprimir(pt);
+	
+
 }
 
 // por favor nao inclua nenhum código abaixo deste ponto
