@@ -12,7 +12,7 @@ char* nroUSP() {
 
 // ######### ESCREVA SEU NOME AQUI
 char* nome() {
-    return("Andre_Palacio_Braga_Tivo");
+    return("AndrePalacioBragaTivo");
 }
 
 // elemento da lista
@@ -172,26 +172,7 @@ int main() {
 
 	// o EP sera testado com chamadas deste tipo
 	NO* teste = NULL;
-
-	for (int i = 0; i < 5; i++)
-	{
-		int l;
-		scanf("%i" , &l );
-		insercao(&p1, l);
-		
-	}
-	imprimir(p1);
-
-	for (int j = 0; j < 5; j++)
-	{
-		int h;
-		scanf("%i" , &h );
-		insercao(&p2, h);
-		
-	}
-	
 	NO* pt = uniao(p1, p2);
-	imprimir(pt);
 }
 
 // por favor nao inclua nenhum código abaixo deste ponto
