@@ -1,0 +1,23 @@
+
+-Sentinela: "Ultimo" elemento, ou seja, um nó vazio no fim da lista que deixa salvo o ultimo elemento, facilitando muito a inserção
+            de novos elementos. Também é usada para auxiliar na busca, aplicando o valor buscado no nó da sentinela para efeito de 
+            comparaçao, ou seja, se sentinela = chaveBusca, o elemento não está na lista. Isso facilita na construção do codigo pois
+            reduz o caso excepcional do elemento não ser de fato encontrado
+
+-Cabeça:    Um nó vazio que marca o inicio da lista, o cabeça.prox é o primeiro elemento.
+
+
+
+
+
+
+2) ex - transformar uma lista ligada dinamica circular em não circular 
+    -> func removerCircularidade()
+        -> encontrar o elemento em que p.prox = inicio e remover a ligação, ou seja, apontar p.prox para NULL,
+        assim removendo a circularidade
+        ->é importante garantir que a lista nao esta vazia
+
+3) ex - inserir chave em uma posição n-1, sendo o 1° elemento n = 1 em uma lista duplamente ligada.
+    -> func inserirNaPosX(lista, posição x, chave inserida)
+        ->
+
