@@ -12,7 +12,7 @@ char* nroUSP() {
 
 // ######### ESCREVA SEU NOME AQUI
 char* nome() {
-    return("AndrePalacioBragaTivo");
+    return("Andre_Palacio_Braga_Tivo");
 }
 
 // elemento da lista
@@ -27,6 +27,7 @@ typedef struct estr {
 NO* uniao(NO* p1, NO* p2);
 NO* juntar(NO** p1, NO** p2);
 NO* insercao(NO**  p, int chaveIns);
+NO* copiarLista(NO* resp);
 void removerRep(NO** listaOrdenada);
 void ordenar(NO** listaUnida);
 void imprimir(NO* p);
@@ -38,24 +39,51 @@ void imprimir(NO* p);
 NO* uniao(NO* p1, NO* p2) {
 
 	NO* resp = NULL;
-	NO* auxp1 = p1;
-	NO* auxp2 = p2;
-
+	NO* auxp1 = copiarLista(p1);
+	NO* auxp2 = copiarLista(p2);
+	
 	if(auxp1 == NULL && auxp2 == NULL)
 	{
 		return resp;
 	}
 	else if(auxp1 == NULL && auxp2 != NULL)
 	{
-		resp = juntar(&p2, &p1);
+		juntar(&auxp2, &auxp1);
+		resp = auxp2;
 	}
 	else
 	{
-		resp = juntar(&p1, &p2);
+		juntar(&auxp1, &auxp2);
+		resp = auxp1;	
 	}
 	ordenar(&resp);
 	removerRep(&resp);
 	return resp;
+}
+
+NO *copiarLista (NO *p) {
+    NO *resp = NULL;
+    NO *contador = p;
+    NO *ant = NULL;
+    while (contador) 
+	{
+        NO* novo = (NO*) malloc(sizeof(NO));
+        novo->valor = contador->valor;
+        
+        if (!resp)
+		{
+            resp = novo;
+        } else
+		{
+            ant->prox = novo;
+            novo->prox = NULL;    
+        }
+        
+        ant = novo;
+        contador = contador->prox;
+    }
+    
+    return resp;
 }
 
 void removerRep(NO** listaOrdenada)
@@ -94,12 +122,14 @@ NO* juntar(NO** p1, NO** p2) //a p1 nao pode ser nula, enquanto a p2 pode. Deve 
 	NO* list1 = *p1;
 	NO* lista2 = *p2;
 	NO* ultimo;
+	
 	while(list1 != NULL)
 	{
 		ultimo = list1;
 		list1 = list1->prox;
 	}
 	ultimo->prox = lista2;
+	
 	return *p1;
 }
 
@@ -172,7 +202,25 @@ int main() {
 
 	// o EP sera testado com chamadas deste tipo
 	NO* teste = NULL;
-	NO* pt = uniao(p1, p2);
+	int n = 0;
+	insercao(&p1 ,1 );
+	insercao(&p1 , 2);
+	insercao(&p1 , 3);
+	insercao(&p1 , 3);
+	insercao(&p1 , 3);
+	insercao(&p1 , 99);
+	insercao(&p2 , 10);
+	insercao(&p2 , 10);
+	insercao(&p2 , 77);
+
+
+	for (int i = 0; i < 5; i++)
+	{
+		printf("%d \n" , i);
+		NO* pt = uniao(p1, p2);
+		imprimir(pt);
+	}
+
 }
 
 // por favor nao inclua nenhum código abaixo deste ponto

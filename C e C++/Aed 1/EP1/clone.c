@@ -12,7 +12,7 @@ char* nroUSP() {
 
 // ######### ESCREVA SEU NOME AQUI
 char* nome() {
-    return("Andre_Palacio_Braga_Tivo");
+    return("AndrePalacioBragaTivo");
 }
 
 // elemento da lista
@@ -27,6 +27,9 @@ typedef struct estr {
 NO* uniao(NO* p1, NO* p2);
 NO* juntar(NO** p1, NO** p2);
 NO* insercao(NO**  p, int chaveIns);
+NO* copia(NO* lista);
+void removerRep(NO** listaOrdenada);
+void ordenar(NO** listaUnida);
 void imprimir(NO* p);
 //------------------------------------------
 // O EP consiste em implementar esta funcao
@@ -36,9 +39,23 @@ void imprimir(NO* p);
 NO* uniao(NO* p1, NO* p2) {
 
 	NO* resp = NULL;
+	NO* auxp1 = p1;
+	NO* auxp2 = p2;
 
-
-
+	if(auxp1 == NULL && auxp2 == NULL)
+	{
+		return resp;
+	}
+	else if(auxp1 == NULL && auxp2 != NULL)
+	{
+		resp = juntar(&p2, &p1);
+	}
+	else
+	{
+		resp = juntar(&p1, &p2);
+	}
+	ordenar(&resp);
+	removerRep(&resp);
 	return resp;
 }
 
@@ -72,6 +89,29 @@ void removerRep(NO** listaOrdenada)
 		}
 	}
 }
+
+NO *copia (NO *lista) {
+    NO *resp = NULL;
+    NO *iterador = lista;
+    NO *elementoAnterior = NULL;
+    while (iterador) {
+        NO* elementoNovo = (NO*) malloc(sizeof(NO));
+        elementoNovo->valor = iterador->valor;
+        
+        if (!resp) {
+            resp = elementoNovo;
+        } else {
+            elementoAnterior->prox = elementoNovo;
+            elementoNovo->prox = NULL;    
+        }
+        
+        elementoAnterior = elementoNovo;
+        iterador = iterador->prox;
+    }
+    
+    return resp;
+}
+
 NO* juntar(NO** p1, NO** p2) //a p1 nao pode ser nula, enquanto a p2 pode. Deve ser feita a condicional ANTES da funcao ser aplicada, para evitar erros
 {
 	NO* list1 = *p1;
@@ -155,34 +195,7 @@ int main() {
 
 	// o EP sera testado com chamadas deste tipo
 	NO* teste = NULL;
-
-	for (int i = 0; i < 5; i++)
-	{
-		int l;
-		scanf("%i" , &l );
-		insercao(&p1, l);
-		
-	}
-	imprimir(p1);
-
-	for (int j = 0; j < 5; j++)
-	{
-		int h;
-		scanf("%i" , &h );
-		insercao(&p2, h);
-		
-	}
-	
-	//imprimir(p1);
-	//imprimir(p2);
-	NO* pt = juntar(&p1, &p2);
-	printf("Lista unida porem nao organizada nem filtrada\n\n");
-	//imprimir(pt);
-	ordenar(&pt);
-	printf("\nOrdenada:\n");
-	imprimir(pt);
-	removerRep(&pt);
-	imprimir(pt);
+	NO* pt = uniao(p1, p2);
 }
 
 // por favor nao inclua nenhum código abaixo deste ponto
