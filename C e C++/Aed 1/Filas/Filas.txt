@@ -1,0 +1,171 @@
+FILAS :
+    LISTA LINEAR COM DISCIPLINA
+    De acesso "FIFO" 
+        Fifo: "First in First out"
+    'lista como qualquer outra'
+
+    -Existem ponteiros de ENTRADA e SAIDA;
+
+    Algoritmo de baixa complexidade: O(n)
+
+
+Oque difere uma FILA de uma lista ligada padrao:
+    
+    1) Algoritmo de entrada;
+        Adiciona um elemento no inicio;
+
+    2) Algoritmo de saída;
+        Remove um elemento no final;
+
+!!CUIDADO COM LISTA VAZIA;
+!!CUIDADO COM LISTA DE UM ELEMENTO;
+
+
+!EXISTE OUTRO TIPO DE FILA 'mais liberal'
+
+DOUBLE ENDED QUEUE(DEQUE)
+    
+    -Existe entrada e saída nas DUAS pontas da fila!!
+        A implementação dinamica é uma lista duplamente ligada (com prox e ant)
+        e dois ponteiros de inicio: Inicio1, em uma ponta da lista, e Inicio2, na outra ponta;
+        INICIO1 : Nao tem anterior.
+        INICIO2 : Nao tem proximo.
+
+
+Inicializar uma fila é simples, se define o inicio e o final como NULL;
+---------------
+FILA DINAMICA
+
+typedef struct
+{
+    NO* inicio;
+    NO* fim;
+}FILA_DINAMICA;
+
+typedef struct st 
+{
+    int chave;
+    struct st prox;
+}NO;
+
+
+
+void inicializarFdin(FILA_DINAMICA* f)
+{
+    F->inicio = NULL;
+    F->fim = NULL;
+}
+
+void entradaFila(FILA_DINAMICA* F, int chaveIn)
+{
+    NO* novo = (NO*)malloc(sizeof(NO));
+    novo->chave = chaveIn;
+    novo->prox = NULL;
+
+    if(F->fim){
+        F->fim->prox = novo; //fila ja existe;
+    }
+    else
+    {
+        F->inicio = novo; //primieira inserçao
+    }
+    F->fim = novo;
+}
+
+int sairFila(FILA_DINAMICA* F) //devolve o elemento da fila para ser utilizado pelo usuario
+{
+    if(!F->inicio) return -1; //garante que o ultimo elemento existe. Se nao existisse, se retorna (-1) por convençao
+    int resp = F->inicio->chave;
+    NO* aux = F->inicio->prox;
+    free(F->inicio);
+    F-inicio = aux;
+    if(!F->inicio) F->fim = NULL; //confere se nao foi removido o ultimo elemento da fila, caso isso ocorra, declara-se a lista vazia;
+    return resp;
+}
+
+--------------------
+#DEFINE MAX 1000
+
+typedef struct st
+{
+    int chave;
+}registro;
+
+typedef struct 
+{
+    registro A[max];
+    int inicio;
+    int fim;
+}FILA_EST;
+
+!!!entrada circular: F->fim = (F-Fim +1)%MAX;
+
+bool entradaFila(FILA_EST* F, int chaveIns)
+{
+    if(TamanhoFila(F) == MAX) return false;
+    F->fim = (F->Fim + 1) % MAX;
+    F->A[F->fim].chave = ch;
+    if(F->inicio == -1) F->inicio = F->fim;
+    return true;
+
+}
+
+int sairFilar(FILA_EST* F)
+{
+    if(F->inicio == -1)return -1;
+    int resp = F->A[F->inicio].chave;
+    if(F->inicio == F->fim){
+        F->inicio = -1;
+        F->fim = -1;
+    }
+    else
+    {
+        F->inicio = (F->inicio +1) % MAX;
+    }
+    return resp;
+}
+
+-----------------------------   
+DOUBLE ENDED QUEUE (DEQUE)
+
+typedef struct
+{                   //O NO é um NO duplo padrao
+    NO* inicio1;    //Nao tem anterior
+    NO* inicio2;    //Nao tem prox
+}DEQUE;
+
+void inicializarDeque(DEQUE* d)
+{
+    d->inicio1 = NULL;
+    d->inicio2 = NULL;
+}
+
+
+void entraInicio(DEQUE* d, int chaveIns)
+{
+    NO* novo = (NO*)malloc(sizeof(NO));
+    novo->chave = chaveIns;
+    novo->prox = d->inico1;
+    novo->ant = NULL;
+    if(!d->inicio1)
+    {
+        d->inicio2 = novo; //1° inserçao
+    }
+    else
+    {
+        d->inicio1->ant = novo; //ja existe
+    }
+d->inicio1 = novo;
+
+}
+
+int sairInicio1(DEQUE* d)
+{
+    if(!d->inicio1)return -1;
+    int resp = d->inicio1->chave;
+    NO* aux = d->inicio1->prox;
+    free(d->inicio1);
+    d->inicio1 = aux;
+    if(!d->incio1) d->inicio2 == NULL;
+    else d->inicio1->ant = NULL;
+}

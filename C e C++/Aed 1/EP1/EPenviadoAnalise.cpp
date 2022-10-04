@@ -202,16 +202,18 @@ int main() {
 
 	// o EP sera testado com chamadas deste tipo
 	NO* teste = NULL;
-	int n = 0;
-/*	
+	
+
+	
 //teste 4
-	 insercao(&p1 , 1 );  insercao(&p1 , 1 ); insercao(&p1 , 1 ); insercao(&p1 , 3 ); insercao(&p1 , 5 ); insercao(&p1 , 9 ); insercao(&p1 , 10 );
-	  insercao(&p1 , 15 ); insercao(&p1 , 15 ); insercao(&p1 , 16 ); 
-	 insercao(&p2 , 1); insercao(&p2 , 2); insercao(&p2 , 3); insercao(&p2 , 3); insercao(&p2 , 4); insercao(&p2 , 4); insercao(&p2 , 5);
-	  insercao(&p2 , 13); insercao(&p2 , 15); insercao(&p2 , 16); insercao(&p2 , 17); insercao(&p2 , 18);
-*/	
+	// insercao(&p1 , 1 );  insercao(&p1 , 1 ); insercao(&p1 , 1 ); insercao(&p1 , 3 ); insercao(&p1 , 5 ); insercao(&p1 , 9 ); insercao(&p1 , 10 );
+	//  insercao(&p1 , 15 ); insercao(&p1 , 15 ); insercao(&p1 , 16 ); 
+	// insercao(&p2 , 1); insercao(&p2 , 2); insercao(&p2 , 3); insercao(&p2 , 3); insercao(&p2 , 4); insercao(&p2 , 4); insercao(&p2 , 5);
+	//  insercao(&p2 , 13); insercao(&p2 , 15); insercao(&p2 , 16); insercao(&p2 , 17); insercao(&p2 , 18);
+	
 //L1 1 1 1 3 5 9 10 15 15 16
-//L2 1 2 3 3 4 4 5 13 15 16 17 18 
+//L2 1 2 3 3 4 4 5 13 15 16 17 18
+
 //-----------------------------------------------------------
 
 //TESTE 6
@@ -220,13 +222,13 @@ int main() {
 //L2 5 6 6 7 7 8
 //Ex 5 6 7 8 10 12 22 56
 
-// insercao(&p1 , 10 ); insercao(&p1 , 12 ); insercao(&p1 , 12 ); insercao(&p1 ,22 ); insercao(&p1 , 56 );
-// insercao(&p2 , 5); insercao(&p2 , 6); insercao(&p2 , 6); insercao(&p2 , 7); insercao(&p2 , 7); insercao(&p2 , 8);
+//insercao(&p1 , 10 ); insercao(&p1 , 12 ); insercao(&p1 , 12 ); insercao(&p1 ,22 ); insercao(&p1 , 56 );
+//insercao(&p2 , 5); insercao(&p2 , 6); insercao(&p2 , 6); insercao(&p2 , 7); insercao(&p2 , 7); insercao(&p2 , 8);
 
 //TESTE7
 
-// insercao(&p1 , 1 ); insercao(&p1 , 4 ); insercao(&p1 , 4 ); insercao(&p1 , 4 ); insercao(&p1 , 8 ); insercao(&p1 , 8 );
-// insercao(&p2 , 2); insercao(&p2 , 5); insercao(&p2 , 5); insercao(&p2 , 5); insercao(&p2 , 10); insercao(&p2 , 10);
+//insercao(&p1 , 1 ); insercao(&p1 , 4 ); insercao(&p1 , 4 ); insercao(&p1 , 4 ); insercao(&p1 , 8 ); insercao(&p1 , 8 );
+//insercao(&p2 , 2); insercao(&p2 , 5); insercao(&p2 , 5); insercao(&p2 , 5); insercao(&p2 , 10); insercao(&p2 , 10);
 
 //L1 1 4 4 4 8 8
 //L2 2 5 5 5 10 10
@@ -254,6 +256,7 @@ int main() {
 //L2 11 11 50 98 101 145 153 153 1000
 //Ex 4 11 12 30 50 98 100 101 145 150 153 1000 3000 
 //-----------------------------------------------------------
+
 
 	for (int i = 0; i < 5; i++)
 	{
