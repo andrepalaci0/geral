@@ -7,13 +7,22 @@
 void lerArq(int n, int m[n][n], char* str);
 void imprimir(int n, int m[n][n]);
 void preencherMatriz(int n, int m[n][n]);
+void dividirConquistarIni(int n, int m[n][n]);
 
 
-void lerArq(int n, int m[n][n], char* str) //le o arquivo e preenche a matriz, transformando os chars em ints;
+void dividirConquistarIni(int n, int m[n][n])
+{
+
+
+    return false;
+}
+
+
+void lerArq(int n, int m[n][n], char* arg )//le o arquivo e preenche a matriz, transformando os chars em ints;
 {
     //ZERO = PRETOS
     //UM = BRANCOS
-    FILE* arq = fopen(str , "r");
+    FILE* arq = fopen(arg , "r");
     if(arq == NULL) printf("Arquivo ausente\n");
     else printf("Arquivo aberto em leitura\n");
     int chToInt;

@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-
+//SOMENTE VERSOES ESTAVEIS NESSE ARQUIVO
 
 void lerArq(int n, int m[n][n], char* str);
 void imprimir(int n, int m[n][n]);

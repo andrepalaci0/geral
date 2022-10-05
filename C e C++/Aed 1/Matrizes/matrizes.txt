@@ -1,0 +1,67 @@
+Matrizes:
+
+int m [n][n];
+
+o tamanho de memoria de uma matriz é sempre (sizeof(tipo) * n²);
+
+Matriz esparsa: 
+    Muito grande na memoria;
+    Poucos elementos 'validos/uteis';
+
+Para resolver uma matriz esparsa, é necessario compacta-la de uma maneira dinamica que ocupe menos espaço ou seja, (sizeof(NO) * elementosValidos) << (sizeof(tipo) * n²);
+
+Existem duas representações para utilizar uma matriz compacta;
+
+1) Em linhas:
+    typedef struct s
+    {
+        (tipo) informaçao;
+        int linha (i);
+        int coluna (j);
+        struct s* prox;
+    }NO;
+
+    typedef struct
+    {
+        NO* inicio;
+        int maxLinhas;
+        int maxColunas;
+    }MATRIZ;
+
+    int valor(MATRIX* m , int i, int j)
+    {
+        NO* p = m->inicio;
+        while(p)
+        {
+            if(p->i == i && p->j == j) return p-info; //i = linha j = coluna
+            if(p->i > i) break;
+            if(p->i == i && p->j > j)break; //a matriz deve estar ordenada por linhas e coluna
+            p = p->prox;
+        }
+    return 0;
+    }
+
+2) Listas cruzadas:
+
+    typedef struct s
+    {
+        int info;
+        int l;
+        int c;
+        struct s* proxL;
+        struct s* proxC;
+    }NO;
+
+    typedef struct
+    {
+        NO* lin[maxlin];
+        NO* col[maxcol];
+    }LISTA_CRUZADA; //matriz dinamica
+
+    void inicializar(LISTA_CRUZADA* m)
+    {
+        int i;
+        int j;
+        for(i = 0, i < maxlin, i++) lin[i] = NULL;
+        for(j = 0; j < maxcol, j++) col[i] = NULL;
+    }
