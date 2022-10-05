@@ -1,27 +1,36 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 //entender melhor como se relacionam ponteiros e matrizes
 
 
-void lerArq(int n, int m[n][n]);
+void lerArq(int n, int m[n][n], char* str);
 void imprimir(int n, int m[n][n]);
 void preencherMatriz(int n, int m[n][n]);
 
 
-void lerArq(int n, int m[n][n])
+void lerArq(int n, int m[n][n], char* str) //le o arquivo e preenche a matriz, transformando os chars em ints;
 {
-    FILE* arq = fopen("USP/Codigos/C e C++/IAA/EP1/ins1.txt" , "r");
-    for (int i = 0; i < n; i++)
+    //ZERO = PRETOS
+    //UM = BRANCOS
+    FILE* arq = fopen(str , "r");
+    if(arq == NULL) printf("Arquivo ausente\n");
+    else printf("Arquivo aberto em leitura\n");
+    int ch;
+    int i = 0;
+    int j = 0;
+    while((ch = fgetc(arq)) != EOF)
     {
-        for (int j = 0; j < n; j++)
-        {
-            m[i][j] = fscanf(arq, "%i" , &m[i][j]);
-        }
-        
+        printf("%c", ch);
+        m[i][j] = ch - 48; //transforma o ASCII do char em int. 48 = 0
+        if(j == n){
+            i++;
+            j = 0;
+        }else j++;
     }
-    
-
+    printf(" \n");
+    fclose(arq);
 }
 
 void preencherMatriz(int n, int m[n][n])
@@ -50,13 +59,14 @@ void imprimir(int n, int m[n][n])
     
 }
 
-int main()
+//LEMBRETE: definir (N = *argv[1] - 48) !
+
+int main(int argc, char* argv[]) //necessario passar o arquivo entrada.txt como argumento -> ./modelo1 ./ins1.txt
 {
-    int n = 7;    
+    int n = 3;    
     int m[n][n];
-    //m[0][0] = 1; m[0][1] = 2; m[1][0] = 3; m[1][1] = 4;
     //preencherMatriz(n, m);
-    lerArq(n, m);
+    lerArq(n, m, argv[1]);
     imprimir(n, m);
     return 0;
 }

@@ -1,0 +1,86 @@
+Pilhas - First in Last out = FILO  "empilhar";
+    -Entrada(push) e saida(pop) em uma extremidade, que é o chamado 'topo';
+
+    Push: Adiciona um elemento ao topo e atualiza esse topo('p cima');
+    
+    Pop: Retira o elemento do topo e atualiza o top('p baixo');
+        -Caso seja tentado remover de uma lista vazia, obtem-se um erro underflow; 
+
+Compiladores usam diversas pilhas em seu funcionamento para resolver funcoes aritiméticas complexas (ou nao);
+
+Tempo de execução O(n);
+
+Pilhas podem ser:
+    -Estatica;
+
+    -Dinamica;
+
+Em um vetor de multiplas pilhas, cria-se uma base. A base NAO FAZ PARTE DA PILHA;
+    ou seja, o topo é criado acima da base;
+    portanto, a base é o elemento anterior ao inicio da pilha;
+
+
+--------
+PILHA DINMICA;
+
+typedef struct
+{
+    NO* topo;
+}PILHA_DIN;
+
+void inicializar(PILHA_DIN* p)
+{
+    p->topo = NULL;
+}
+
+void push(PILHA_DIN* p, int chaveIns)
+{
+    NO* novo = (NO*)malloc(sizeof(NO));
+    novo->chave = chaveIns;
+    novo->prox = topo;
+    p->topo = novo;
+}
+
+int pop(PILHA_DIN* p)
+{
+    if(!p->topo) return -1; //testa se a pilha existe/teste de underflow
+    int resp = p->topo->chave;
+    NO* aux = p->topo->prox;
+    free(p->topo);
+    p->topo = aux;
+    return resp;
+}
+
+-------------
+Pilha estatica
+
+typedef struct 
+{
+    REGISTROS A[MAX];
+    int topo;
+}PILHA_EST;
+
+void inicializar(PILHA_EST* p)
+{
+    p->topo = -1;
+}
+
+bool push(PILHA_EST* p, int chaveIns)
+{
+    if(p->topo >= (MAX-1)) return false; //stackoverflow
+    p->topo++;
+    p->A[p->topo].chave = chaveIns;
+    return true;
+}
+
+int pop(PILHA_EST* p)
+{
+    if(p->topo == -1) return -1; //underflow
+    int resp = p->A[p->topo].chave;
+    p->topo--;
+    return resp;
+}
+
+--------------
+NP (N pilhas)
+
