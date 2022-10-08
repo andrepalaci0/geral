@@ -62,7 +62,7 @@ void imprimir(int n, int m[n][n])
 
 int main(int argc, char* argv[]) //necessario passar o arquivo entrada.txt como argumento -> ./modelo1 ./ins1.txt
 {
-    int n = 3;    
+    int n = 4;    
     int m[n][n];
     //preencherMatriz(n, m);
     lerArq(n, m, argv[1]);

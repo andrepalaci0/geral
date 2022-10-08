@@ -1,0 +1,17 @@
+a cor de cada elemento so pode ser consultada uma vez, ou seja, a matriz deve ser percorrida uma unica vez.
+
+é necessario utilizar o modo de dividir e conquistar, ou seja, dividir o problema em problemas menores o quanto for possível
+e entao resolver esses problemas atomicos, usando as solucoes individuais deles para solucionar os problemas maiores
+    -recursividade
+
+é necessario entao uma funcao que faca a divisao e a conquista.
+    -booleana?
+
+
+bool funcaoRecursiva(int ladoDaMatriz, int matriz[n][n])
+{
+
+    
+}
+
+    
