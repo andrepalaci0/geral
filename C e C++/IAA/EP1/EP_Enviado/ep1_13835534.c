@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut); //principal funcao recursiva
+int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contP, int *contB, int nMut); //principal funcao recursiva
 int defineIndex(int n); //funcao auxiliar para a funcao recursiva, informa qual o index do array de respostas sera utilizado na respectiva iteraçao
 void lerArq(int n, int m[n][n], char *str); //le e interpreta o arquivo
 void imprimir(int n, int m[n][n]); //funcao para testes que imprime a matriz pós leitura
@@ -54,7 +54,7 @@ int defineIndex(int n)
 
 }
 
-int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut)
+int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contP, int *contB, int nMut)
 {
     int indexArr = defineIndex(nMut);
 
@@ -71,10 +71,10 @@ int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *c
     {   
         //nEst = N Estavel; nMut = N Mutavel
         int TL = 0; int TR = 0; int BL = 0; int BR = 0; int soma = 0;
-        TL = folhas(nEst, m, l, c, nMut / 2, nMut / 2, contAux1, contAux2, contP, contB, nMut / 2); // canto superior esquerdo
-        TR = folhas(nEst, m, l, c + nMut / 2, nMut / 2, nMut, contAux1, contAux2, contP, contB, nMut / 2); // canto superior direito
-        BL = folhas(nEst, m, l + nMut / 2, c, nMut, nMut / 2, contAux1, contAux2, contP, contB, nMut / 2); // canto inferior esquerdo
-        BR = folhas(nEst, m, l + nMut / 2, c + nMut / 2, nMut, nMut, contAux1, contAux2, contP, contB, nMut / 2); // canto inferior direito
+        TL = folhas(nEst, m, l, c, nMut / 2, nMut / 2, contP, contB, nMut / 2); // canto superior esquerdo
+        TR = folhas(nEst, m, l, c + nMut / 2, nMut / 2, nMut, contP, contB, nMut / 2); // canto superior direito
+        BL = folhas(nEst, m, l + nMut / 2, c, nMut, nMut / 2, contP, contB, nMut / 2); // canto inferior esquerdo
+        BR = folhas(nEst, m, l + nMut / 2, c + nMut / 2, nMut, nMut, contP, contB, nMut / 2); // canto inferior direito
         soma = TL + TR + BL + BR;
 
         if(TL == -1 || TR == -1 || BL == -1 || BR == -1 || (soma != 0 && soma != 4))
@@ -129,10 +129,7 @@ bool raiz(int n, int m[n][n])
         arrB[i] = 0;
     }
 
-    int cont = 0;
-    int cont2 = 0;
-
-    int resp = folhas(n, m, 0, 0, 0, 0, &cont, &cont2, arrP, arrB, n);
+    int resp = folhas(n, m, 0, 0, 0, 0, arrP, arrB, n);
     if(resp == 1) arrB[tamArrR] = 1; //se a resposta final é 1, a imagem é totalmente branco
     else if(resp == 0) arrP[tamArrR] = 1; //se a resposta final é 0, a imagem é totalmente preta
     //imprimirResp(n, m, arrP, arrB, tamArrR); //imprime resposta no terminal
@@ -197,4 +194,4 @@ int main(int argc, char *argv[]) // necessario passar o arquivo entrada.txt como
     //imprimir(n, m);
     raiz(n, m);
     return 0;
-}
+} 

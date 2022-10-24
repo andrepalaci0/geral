@@ -6,15 +6,15 @@
 #include <stdlib.h>
 #include <math.h>
 
-int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut); //principal funcao recursiva
+int folhas(int nEst, char m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut); //principal funcao recursiva
 int defineIndex(int n); //funcao auxiliar para a funcao recursiva, informa qual o index do array de respostas sera utilizado na respectiva iteraçao
-void lerArq(int n, int m[n][n], char *str); //le e interpreta o arquivo
+void lerArq(int n, char m[n][n], char *str); //le e interpreta o arquivo
 void imprimir(int n, int m[n][n]); //funcao para testes que imprime a matriz pós leitura
 void preencherMatriz(int n, int m[n][n]); //funcao para testes que preenche a matriz quadrada de zeros ou uns
-void arquivoSaidaTxt(int n, int m[n][n], int *contP, int *contB, int tamArr); //funcao que cria o arquivo saida.txt
+void arquivoSaidaTxt(int n, char m[n][n], int *contP, int *contB, int tamArr); //funcao que cria o arquivo saida.txt
 void imprimirResp(int n, int m[n][n], int *contP, int *contB, int tamArr); //imprime a mesma resposta que a arquivoSaidaTxt() porem no terminal
 
-void arquivoSaidaTxt(int n, int m[n][n], int *contP, int *contB, int tamArr)
+void arquivoSaidaTxt(int n, char m[n][n], int *contP, int *contB, int tamArr)
 {
     FILE* saida = fopen("saida.txt" , "w");
     
@@ -54,7 +54,7 @@ int defineIndex(int n)
 
 }
 
-int folhas(int nEst, int m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut)
+int folhas(int nEst, char m[nEst][nEst], int l, int c, int maxL, int maxC, int *contAux1, int *contAux2, int *contP, int *contB, int nMut)
 {
     int indexArr = defineIndex(nMut);
 
@@ -117,7 +117,7 @@ void imprimirResp(int n, int m[n][n], int *contP, int *contB, int tamArr)
     }
 }
 
-bool raiz(int n, int m[n][n])
+bool raiz(int n, char m[n][n])
 {
     double giba = log(n) / log(2);
     int tamArrR = (int)giba+1; //as dimensoes dos quadrantes é log2(n)
@@ -141,7 +141,7 @@ bool raiz(int n, int m[n][n])
 }
 
 
-void lerArq(int n, int m[n][n], char *str) // le o arquivo e preenche a matriz, transformando os chars em ints;
+void lerArq(int n, char m[n][n], char *str) // le o arquivo e preenche a matriz, transformando os chars em ints;
 {    // ZERO = PRETOS
     // UM = BRANCOS
     FILE *arq = fopen(str, "r");
@@ -191,7 +191,7 @@ void imprimir(int n, int m[n][n])
 int main(int argc, char *argv[]) // necessario passar o arquivo entrada.txt como argumento -> ./modelo1 ./ins1.txt
 {   
     int n = atoi(argv[1]);
-    int m[n][n];
+    char m[n][n];
     //preencherMatriz(n, m);
     lerArq(n, m, argv[2]);
     //imprimir(n, m);
