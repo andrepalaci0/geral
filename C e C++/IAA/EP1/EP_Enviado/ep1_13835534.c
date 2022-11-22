@@ -142,7 +142,7 @@ void lerArq(int n, int m[n][n], char *str) // le o arquivo e preenche a matriz, 
 {    // ZERO = PRETOS
     // UM = BRANCOS
     FILE *arq = fopen(str, "r");
-    /*if (arq == NULL)
+    /*if (arq == NULL)  
         printf("Arquivo ausente\n");
     else
          printf("Arquivo aberto em leitura\n");*/
