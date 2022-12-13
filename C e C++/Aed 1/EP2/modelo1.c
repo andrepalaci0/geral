@@ -32,11 +32,16 @@ typedef struct estrL
 
 NO *copiaCompleta(NO *raiz);
 NO *copiaOriginalPraManipulavel(NO *raiz);
-NOL *arvorePraLista(NO *raiz);
+NO *arvorePraLista(NO *raiz);
 NOL *insercao(NOL **p, int chaveIns);
 NO *insercaoBinaria(NO *p, int chaveIns);
 NO *criaNO(int chave);
+NO *posElemento(NO *raiz, int posicao);
+int tamanhoLista(NO *raiz);
+void criaArvoreAlturaMinima(NO *listaDir, int comeco, int fim, NO **resp);
 void arvoreSomenteDir(NO *raiz);
+void ordenar(NO **listaUnida);
+void printaPreOrdem(NO *raiz);
 
 //------------------------------------------
 // O EP consiste em implementar esta funcao
@@ -44,22 +49,66 @@ void arvoreSomenteDir(NO *raiz);
 
 NO *copiaCompleta(NO *raiz)
 {
-    // raiz = raizOriginal (NAO UTILIZAR);
-    NO *novaArvore = (NO *)malloc(sizeof(NO));
-    novaArvore = copiaOriginalPraManipulavel(raiz);
-    NO *transformarEmLista = copiaOriginalPraManipulavel(novaArvore);
+    if (raiz)
+    {
+        // raiz = raizOriginal (NAO UTILIZAR);
+        NO *novaArvore = (NO *)malloc(sizeof(NO));
+        novaArvore = copiaOriginalPraManipulavel(raiz);
+        NO *transformarEmLista = copiaOriginalPraManipulavel(novaArvore);
 
-    NOL *listaLigada = (NOL *)malloc(sizeof(NOL));
+        NO *listaLigada = arvorePraLista(transformarEmLista); // a lista ligada é na verdade uma arvore que tem todos seus elementos à direita
+        int tamanho = tamanhoLista(listaLigada);
+        printf("TAMANHO\n%i\n", tamanho);
+        int meio = (tamanho - 1) / 2;
+        NO *aux = posElemento(listaLigada, meio);
+        NO *resp = criaNO(aux->chave);
+        criaArvoreAlturaMinima(listaLigada, 0, (tamanho - 1), &resp);
+        printaPreOrdem(resp);
+    }
+}
 
-    listaLigada = arvorePraLista(transformarEmLista);
+void criaArvoreAlturaMinima(NO *listaDir, int comeco, int fim, NO **resp)
+{
+    if (listaDir)
+    {
+        if (comeco > fim)
+            return;
+        int meio = (comeco + fim) / 2;
+        int aux = posElemento(listaDir, meio)->chave;
+        NO *elementoMeio = criaNO(aux);
+        insercaoBinaria(*resp, elementoMeio->chave);
+        criaArvoreAlturaMinima(listaDir, meio + 1, fim, resp);
+        criaArvoreAlturaMinima(listaDir, comeco, meio - 1, resp);
+    }
+}
+
+void printaPreOrdem(NO *raiz)
+{
+    if (raiz)
+    {
+        printf("%i ", raiz->chave);
+        printaPreOrdem(raiz->esq);
+        printaPreOrdem(raiz->dir);
+    }
+}
+
+NO *posElemento(NO *raiz, int posicao)
+{
+    if (raiz)
+    {
+        for (int i = 0; i < posicao; i++)
+        {
+            raiz = raiz->dir;
+        }
+        return raiz;
+    }
+    return raiz;
 }
 
 NO *copiaOriginalPraManipulavel(NO *raizOriginal)
 {
-    // Arrumar erro segmentation fault
-    // Motivo???
-    // Problema na relacao com a raizManipulavel e o nodulo novo
-    // Repensar lógica ?
+    // atualizada 100% funcional
+    // vital sempre utilizar uma funcao criaNo
     if (raizOriginal)
     {
         if (raizOriginal->dir == NULL && raizOriginal->esq == NULL)
@@ -77,50 +126,62 @@ NO *copiaOriginalPraManipulavel(NO *raizOriginal)
     return raizOriginal; // caso a lista for vazia retorna ela mesma (NULL)
 }
 
-NOL *arvorePraLista(NO *raiz)
+NO *arvorePraLista(NO *raiz)
 {
     if (!raiz)
         return NULL;
     if (raiz->esq == NULL && raiz->dir == NULL)
     {
-        NOL *resp = malloc(sizeof(NOL));
+        NO *resp = malloc(sizeof(NOL));
         resp->chave = raiz->chave;
+        resp->esq = NULL;
+        resp->esq = NULL;
         return resp;
     }
-    NOL *resp = malloc(sizeof(NOL));
-    // arvoreSomenteDir(raiz);
+    NO *resp;
+    arvoreSomenteDir(raiz);
     NO *contador = raiz;
     int condicional = 0;
     NO *imprime = raiz;
-    printf("ARVORE COPIADA: ");
+    printf("ARVORE COPIADA A DIREITA: ");
     while (imprime)
     {
         printf("%i ", imprime->chave);
         imprime = imprime->dir;
     }
     printf("\n");
+    ordenar(&raiz);
 
-    /*while (contador != NULL)
+    NO *imprimeOrd = raiz;
+    printf("ARVORE ORDENADA: ");
+    while (imprimeOrd)
     {
-        if (condicional == 0)
-        {
-            printf("cond1");
-            condicional = 1;
-            resp->chave = contador->chave;
-            resp->prox = NULL;
-            contador = contador->dir;
-        }
-        printf("fora if");
-        contador = contador->dir;
-        insercao(&resp, contador->chave);
+        printf("%i ", imprimeOrd->chave);
+        imprimeOrd = imprimeOrd->dir;
     }
-    printf("fora while");
-    NOL *aux = resp;
-    while (aux != NULL)
+    printf("\n");
+    return raiz;
+}
+
+void ordenar(NO **listaUnida)
+{
+    NO *a = *listaUnida;
+    NO *b = *listaUnida;
+    while (a)
     {
-        printf("%i", aux->chave);
-        aux = aux->prox;
-    } */
+        b = a->dir;
+        while (b)
+        {
+            if (b->chave < a->chave)
+            {
+                int aux = a->chave;
+                a->chave = b->chave;
+                b->chave = aux;
+            }
+            b = b->dir;
+        }
+        a = a->dir;
+    }
 }
 
 NOL *insercao(NOL **p, int chaveIns)
@@ -180,7 +241,7 @@ void arvoreSomenteDir(NO *raiz)
             raiz->dir = raiz->esq;
             raiz->esq = NULL;
             NO *contador = raiz->dir;
-            printf("giba");
+
             while (contador->dir != NULL)
             {
                 contador = contador->dir;
@@ -190,6 +251,18 @@ void arvoreSomenteDir(NO *raiz)
         arvoreSomenteDir(raiz->dir);
     }
 }
+
+int tamanhoLista(NO *raiz)
+{
+    NO *contador = raiz;
+    int tamanho = 0;
+    while (contador)
+    {
+        tamanho++;
+        contador = contador->dir;
+    }
+    return tamanho;
+}
 //---------------------------------------------------------
 // use main() para fazer chamadas de teste ao seu programa
 //---------------------------------------------------------
@@ -197,18 +270,24 @@ int main()
 {
 
     // FAZER FUNCAO DE INSERCAO PARA TESTAR !
+
     NO *raiz = criaNO(10);
     insercaoBinaria(raiz, 15);
     insercaoBinaria(raiz, 20);
     insercaoBinaria(raiz, 25);
     insercaoBinaria(raiz, 5);
+    insercaoBinaria(raiz, 6);
+    insercaoBinaria(raiz, 50);
+    insercaoBinaria(raiz, 4);
+    insercaoBinaria(raiz, 12);
+    insercaoBinaria(raiz, 22);
     insercaoBinaria(raiz, 30);
-    printf("%i\n", raiz->chave);
-    printf("%i\n", raiz->esq->chave);
-    printf("%i\n", raiz->dir->chave);
-    printf("\n");
 
-    copiaCompleta(raiz);
+    for (int i = 0; i < 2; i++)
+    {
+
+        NO* resp = copiaCompleta(raiz);
+    }
 
     // acrescente aqui alguns nos para criar uma arvore de teste
 
