@@ -33,15 +33,15 @@ typedef struct estrL
 NO *copiaCompleta(NO *raiz);
 NO *copiaOriginalPraManipulavel(NO *raiz);
 NO *arvorePraLista(NO *raiz);
-NOL *insercao(NOL **p, int chaveIns);
 NO *insercaoBinaria(NO *p, int chaveIns);
 NO *criaNO(int chave);
 NO *posElemento(NO *raiz, int posicao);
-int tamanhoLista(NO *raiz);
+
 void criaArvoreAlturaMinima(NO *listaDir, int comeco, int fim, NO **resp);
 void arvoreSomenteDir(NO *raiz);
 void ordenar(NO **listaUnida);
 void printaPreOrdem(NO *raiz);
+int tamanhoLista(NO *raiz);
 
 //------------------------------------------
 // O EP consiste em implementar esta funcao
@@ -55,17 +55,15 @@ NO *copiaCompleta(NO *raiz)
         NO *novaArvore = (NO *)malloc(sizeof(NO));
         novaArvore = copiaOriginalPraManipulavel(raiz);
         NO *transformarEmLista = copiaOriginalPraManipulavel(novaArvore);
-
         NO *listaLigada = arvorePraLista(transformarEmLista); // a lista ligada é na verdade uma arvore que tem todos seus elementos à direita
         int tamanho = tamanhoLista(listaLigada);
-        printf("TAMANHO\n%i\n", tamanho);
         int meio = (tamanho - 1) / 2;
         NO *aux = posElemento(listaLigada, meio);
-        NO *resp = criaNO(aux->chave);
+        NO *resp = criaNO(aux->chave); // primeiro nó;
         criaArvoreAlturaMinima(listaLigada, 0, (tamanho - 1), &resp);
-        printaPreOrdem(resp);
         return resp;
     }
+    return raiz;
 }
 
 void criaArvoreAlturaMinima(NO *listaDir, int comeco, int fim, NO **resp)
@@ -132,39 +130,13 @@ NO *arvorePraLista(NO *raiz)
     if (!raiz)
         return NULL;
     if (raiz->esq == NULL && raiz->dir == NULL)
-    {
-        NO *resp = (NO*)malloc(sizeof(NOL));
-        resp->chave = raiz->chave;
-        resp->esq = NULL;
-        resp->esq = NULL;
-        return resp;
-    }
-    NO *resp;
+        return criaNO(raiz->chave);
     arvoreSomenteDir(raiz);
-    NO *contador = raiz;
-    int condicional = 0;
-    NO *imprime = raiz;
-    printf("ARVORE COPIADA A DIREITA: ");
-    while (imprime)
-    {
-        printf("%i ", imprime->chave);
-        imprime = imprime->dir;
-    }
-    printf("\n");
     ordenar(&raiz);
-
-    NO *imprimeOrd = raiz;
-    printf("ARVORE ORDENADA: ");
-    while (imprimeOrd)
-    {
-        printf("%i ", imprimeOrd->chave);
-        imprimeOrd = imprimeOrd->dir;
-    }
-    printf("\n");
     return raiz;
 }
 
-void ordenar(NO **listaUnida)
+void ordenar(NO **listaUnida) // funcao de ordenar utilizada no meu EP1, levemente moodificada para aceitar o modelo de lista que estou utilizando
 {
     NO *a = *listaUnida;
     NO *b = *listaUnida;
@@ -183,27 +155,6 @@ void ordenar(NO **listaUnida)
         }
         a = a->dir;
     }
-}
-
-NOL *insercao(NOL **p, int chaveIns)
-{
-    NOL *aux = *p;
-    NOL *ins = (NOL *)(malloc(sizeof(NOL)));
-    ins->chave = chaveIns;
-    ins->prox = NULL;
-    if (*p == NULL)
-    {
-        *p = ins;
-    }
-    else
-    {
-        while (aux->prox != NULL)
-        {
-            aux = aux->prox;
-        }
-        aux->prox = ins;
-    }
-    return aux;
 }
 
 NO *insercaoBinaria(NO *raiz, int chaveIns)
@@ -228,7 +179,7 @@ NO *criaNO(int chave)
     return novo;
 }
 
-void arvoreSomenteDir(NO *raiz)
+void arvoreSomenteDir(NO *raiz) //"planifica" a arvore recursivamente
 {
     if (raiz)
     {
@@ -267,11 +218,11 @@ int tamanhoLista(NO *raiz)
 //---------------------------------------------------------
 // use main() para fazer chamadas de teste ao seu programa
 //---------------------------------------------------------
+/*
 int main()
 {
 
     // FAZER FUNCAO DE INSERCAO PARA TESTAR !
-
     NO *raiz = criaNO(10);
     insercaoBinaria(raiz, 15);
     insercaoBinaria(raiz, 20);
@@ -283,16 +234,19 @@ int main()
     insercaoBinaria(raiz, 12);
     insercaoBinaria(raiz, 22);
     insercaoBinaria(raiz, 30);
-    
+    NO *resp;
     for (int i = 0; i < 2; i++)
     {
 
-        NO* resp = copiaCompleta(raiz);
+        resp = copiaCompleta(raiz);
     }
+    printf("\n");
+    printaPreOrdem(resp);
+
     // acrescente aqui alguns nos para criar uma arvore de teste
 
     // serao realizadas chamadas como esta:
     // NO* resp = copiaCompleta(raiz);
 }
-
+*/
 // por favor nao inclua nenhum código abaixo da função main()
