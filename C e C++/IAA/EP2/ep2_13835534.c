@@ -31,14 +31,14 @@ void defineArrATT(int *arrInt, ATT *arrATT, int tamArr);
 
 void arquivoSaidaTxtCen1(ATT *arr, int atualizacoesSomadas)
 {
-    FILE *saida = fopen("saida.txt", "w");
+        FILE *saida1 = fopen("saida1.txt", "w");
 
-    fprintf(saida, "%i ", atualizacoesSomadas);
+    fprintf(saida1, "%i ", atualizacoesSomadas);
     for (int i = 0; i < atualizacoesSomadas; i++)
     {
-        fprintf(saida, "%i ", arr[i].indice);
+        fprintf(saida1, "%i ", arr[i].indice);
     }
-    fclose(saida);
+    fclose(saida1);
 }
 
 void funcCen1(ATT arr[], int tamArr, int dur)
