@@ -1,0 +1,30 @@
+Uma classe abstrata 
+É um tipo de classe que gera modelos para classes relacionadas
+bem parecido com o exemplo de animais que fazemBarulho().
+Uma classe abstrata servirá de base para classes que a expandem.
+(extends)
+
+abstract class Dog {
+    public void bark(){
+        System.out.println("Bark!");
+    }
+}
+
+class ViraLata extends Dog {} //NADA dentro da classe
+
+dentro da main{
+
+    ViraLata luna = new ViraLata();
+    luna.bark(); //Bark!  
+}
+
+codigo funcional
+
+METODOS abstratos são metodos pré definidos porém sem 
+funcionalidade de fato, ou seja, a funcao é declarada
+mas não tem codigo dentro dela. A funcionalidade deve
+ser implementada na classe que utiliza o metodo abstrato
+ 
+a diferenca entre interface e uma classe abstrata é que a interface
+exige que todos os métodos sejam abstratos, já a classe abstrata não.
+

@@ -1,0 +1,38 @@
+PACOTES: nome.deve.ser.assim
+
+    existe bastante complexidade na nomenclatura de pacotes, nao creio que seja 
+    relevante, porém:
+
+    de preferencia um pacote é composto por UMA palavra
+    e seus subpacotes são feitos com pontos, ex:
+
+    pacote.
+        -subpacote1
+            -subsubpacote1
+        -subpacote2
+            -subsubpacote2
+
+    porém as divisoes de pacotes normalmente são internas
+    às desenvolvedoras
+
+CLASSES: Giba, GibaMuitoFoda
+
+    Os nomes de classes devem ser substantivos, de preferencia o menor possível, poŕem
+    valorizando a compreensão (OU SEJA, o nome pode ficar gigantesco se o projeto for
+    grande kk)
+    NUNCA use abreviações para nomes de classes (exceto para casos como HTML ou HTTP etc)
+
+
+INTERFACES: NomeInterface
+    nada pra acrescentar
+
+METODOS/FUNCOES: transformaGiba(), cancelaGibba(),
+    Devem ser sempre verbos em camelCase.
+
+VARIAVEIS: ponteiroListaOrdenada, somaPares
+    Nomes de variaveis devem ser minimamente autoexplicativos e nao tão longos.
+    EVITE nomes como 'i', 'a', 'x' etc. Use SOMENTE em casos de iteradores momentaneos
+    que NAO serão utilizados no futuro;
+
+CONSTANTES: MAX_VERTICES, MIN_VERTICES;
+    (constantes globais, static final int, por ex)

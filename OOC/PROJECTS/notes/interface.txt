@@ -1,0 +1,6 @@
+BASICAMENTE serve de modelo pra certas aplicações que tem estruturas repetidas mas 
+são diferentes em essencia
+
+ex: Cachorro e Vaca fazemBarulho() mas o cachorro late e a vaca muge
+
+a utilidade ainda nao ta 100% clara p mim
