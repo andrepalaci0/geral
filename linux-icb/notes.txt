@@ -1,0 +1,17 @@
+VM ip: 200.144.244.172
+usr: andret 
+psswrd: @ilcl2023
+
+connect: ssh -p 2112 andret@200.144.244.172
+
+apropos - pesquisa comando ou definicao do comando
+
+paste: shift + ins
+copy: select the line, linux buffer alreay auto-copies
+
+$man or $info give information about a commnd
+
+type tells you if a command is internal or external
+    if it gives you a path, its a external cmd
+
+
