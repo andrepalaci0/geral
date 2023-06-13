@@ -14,4 +14,82 @@ $man or $info give information about a commnd
 type tells you if a command is internal or external
     if it gives you a path, its a external cmd
 
+pwd: working directory
+
+cp file1 file2 
+    what is being copied and where its being copied to
+    copies but  not transfers
+
+mv file1 dir1
+    transfer/move files
+
+wildcards: (work like regex??)
+    ? one char
+    * zero or more
+    [] list/range of chars to match one
+    [!] negation list
+
+standar streams
+
+stdin = 0
+stdout = 1
+stderr = 2
+
+>  redirect stdout to the file after te sign
+2> redirect stderr
+>> redirect, appending, stdout
+2>> redirect, appending, stderr
+< redirect stdin FROM the file
+<< redirect stdin as a here-document
+<<< redirect stdin as a here-string
+
+more : shows more text
+
+less : shows less text
+    both are pagers but less ir stronger and more complex
+
+cat : can be used to show stuff in te screen (stdout) 
+    but you can use it to conCATenate text 
+        example: cat file1 file3 file2 > all_data
+
+column -t : display understandable tabular data  
+
+cut : allows to get selected columns from files  
+
+sort: sorts content of one or more files, and theres the possibility to merge then
+
+shuf: randomness generator, can be used to suffle files and inputs
+
+colrm: delete columns from data /stdin
+
+paste: joins (PASTES) two files in one
+    usually in two columns, creating a table
+
+join: join lines from files
+-- 
+aula pre prova
+
+awk "quebra" ou segmenta a linha de imput usando espaço/blank como delimitador
+
+awk [options] 'script' datafile
+    o script pode ser um script shell mesmo so usar a flag -f
+
+    awk -F ";" '/SP/ {print $3 $1}" /dara/awkdata
+    /blablabla/ means search for blablalba /search/
+
+
+REGEX:
+
+ ' . ' qualquer caracter, incluindo o ponto em shift
+^ começo de linha
+$ fim de lonha
+
+[ ] lista de caracteres
+
+* quantificador de ocorrencias, por exemplo a* = zero ou mais
+
+grep -i ^..j.r$ /usr/share/dict/american-english 
+    pra achar uma palavra com cinco letrar sendo a terceira j e a ultima r 
+
+
 

@@ -1,0 +1,43 @@
+grafos direcionados
+    conectados in one way, ou seja, o que vai NAO volta. 
+
+grafos nao direcionados
+    conectados sem direcao específica
+
+grau de um grafo nao direcionado:
+    grau total de um grafo: G= 2*Nodes
+        ou seja, o grau total é o dobro do numero total de 
+        nós do grafo
+
+
+---
+
+Encontrando ciclos em um grafo direcionado:
+
+    Utiliza-se busca de profundidade, caso a busca passe por um grafo cinza (sem ser durante o callback), haverá ciclo no grafo
+---
+
+Encontrando ciclos em um grafo não direcionado:
+
+  Utilizando busca em largura, usando filas, caso seja encontrado um vértice cinza, o grafo contem um ciclo  
+---
+
+Ordenação Topológica:
+
+    O grafo DEVE ser Direcionado e Acíclico
+    Ordenação Topológica é basicamente ordenar por numero de arestas recebidas no sentido crescente
+    ou seja, dos vertices não recebem nenhuma aresta até os que recebem o máximo possívelc7
+---
+
+Algoritmo de Kruskal:
+
+    1°: Organiza todas as conexoes do grafo em ordem crescente 
+    2°: Cria um array de Minimum Spanning Tree e adiciona os grafos em ordem crescente na lista, selecionando sempre o menor possível,
+        desde que nao forme um ciclo (podendo utilizar o metodo das cores (branco, cinza e preto)) fazendo a melhor escolha
+        no momento atual, logo, Kruskal é um algoritmo guloso.
+---
+
+Algoritmo de Prim
+
+    
+

@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #include "grafo_listaadj.h"
-#include "grafo_matrizadj.h"
+ #include "grafo_listaadj.h"
+ //#include "grafo_matrizadj.h"
 
 void printOutText(Peso resp, FILE *saida) {
   double out;
@@ -23,9 +23,9 @@ void printOutText(Peso resp, FILE *saida) {
   else if (resp < 3.0 && resp >= 2.5)
     out = 2.5;
   else
-    out = 0;
+    out = 0; //instrucao da prof ariane imprimr zero se por acaso um peso seja menor que 2.5
 
-  printf("%f\n", out);
+  //printf("%f\n", out);
   fprintf(saida, "%.1f\n", out);
   fflush(saida);
 }
@@ -68,60 +68,48 @@ void maxTree(int nNodes, int node1, int node2, Graph *graph, FILE *saida) {
   Peso pesos[tamArray];
   bool visitados[tamArray];
   int antecessores[tamArray];
-
+  //printf("entrou na max\n");
   for (int i = 0; i <= nNodes; i++) {
     pesos[i] = FLT_MIN;
     visitados[i] = false;
   }
   antecessores[node1] = -1;
   pesos[node1] = FLT_MAX;
-  // ARVORE MATRIZ
-
+  Pointer current;
   for (int i = 0; i < nNodes; i++) {
-    fflush(saida);
-    // printf("entrou no for\n");
+
+    // printf("rodou o for\n");
+
     int aux = maxNode(visitados, nNodes, pesos);
-    printf("maxNode: %d\n", aux);
+
+    // printf("passou o maxnode\n");
+
+    //printf("j: %d ", aux);
 
     visitados[aux] = true;
-    // printf("%d %d %f \n", visitados[i], nNodes, pesos[i]);
 
-    for (int j = 0; j < nNodes; j++) {
-      if (visitados[j] == false && graph->mat[aux][j] != NULLEDGE) {  //transformar isso em uma funcao que percorre a lista
-        if (graph->mat[aux][j] > pesos[j]) {
-          antecessores[j] = aux;
-          printf("ANT %d", antecessores[i]);
-          pesos[j] = graph->mat[aux][j];
+    current = getNode(current, aux, graph);
+    while (current != INVALIDNODE) {
+      int dest = getDest(current, graph);
+
+      if ((current) && visitados[dest] == false) {
+
+        if (pesos[dest] < getEdgeWeight(aux, dest, graph)) {
+
+          antecessores[dest] = aux;
+
+          pesos[dest] = getEdgeWeight(aux, dest, graph);
         }
       }
+      current = listNext(i, graph, current);
+      //printf("ta aualizano o current");
     }
-    printf("ant: %d\n", antecessores[i]);
+
+    // printf("current");
   }
 
-  // FUNCAO LISTA ADJ
-  /*
-
-  for (int i = 0; i < nNodes; i++) {
-    // printf("rodou o for\n");
-    int j = maxNode(visitados, nNodes, pesos);
-    // printf("passou o maxnode\n");
-    printf("j: %d ", j);
-    visitados[j] = true;
-    Pointer current = graph->list[j];
-    while ((current)) {
-      if ((current) && visitados[current->vdest] == false) {
-        if (pesos[current->vdest] < current->peso) {
-          antecessores[current->vdest] = j;
-          pesos[current->vdest] = current->peso;
-        }
-      }
-      // printf("current");
-      current = current->prox;
-    }
-  } */
-
   Peso resp = getWeight(pesos, antecessores, node1, node2);
-  printf("RESPOSTA: %f \n", resp);
+  //printf("RESPOSTA: %f \n", resp);
   printOutText(resp, saida);
 }
 
@@ -131,7 +119,7 @@ int main(int argc, char *argv[]) {
     printf("File error");
     return -1;
   }
-  int centros; // nodes -pq eu escrevo em portugues em ingles?
+  int centros; // nodes 
   int rotas;   // edges
   int consultas;
   // read operation:
@@ -161,7 +149,7 @@ int main(int argc, char *argv[]) {
     // printf("\n");
   }
 
-  printGraph(&graph, centros);
+  //printGraph(&graph, centros);
   // printf("centros: %i\nrotas: %i\nconsultas: %i\n", centros, rotas,
   // consultas);
   fflush(arq);

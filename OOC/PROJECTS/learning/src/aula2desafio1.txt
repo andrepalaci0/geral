@@ -1,0 +1,16 @@
+import java.util.*;
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        int x = 1;
+        int soma = 0;
+        while(x<=100)
+        {
+            //x += 1;
+            soma += x;
+            x++;
+            System.out.println(soma);            
+        }
+    }
+} 
